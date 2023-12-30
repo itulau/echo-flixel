@@ -4,6 +4,7 @@ import echo.util.verlet.Verlet;
 import echo.Body;
 import echo.Echo;
 import echo.World;
+import echo.Listener;
 import echo.data.Options.BodyOptions;
 import echo.data.Options.ListenerOptions;
 import echo.data.Options.WorldOptions;
@@ -138,7 +139,7 @@ class FlxEcho extends FlxBasic
 	/**
 	 * Creates a physics listener
 	 */
-	public static function listen(a:FlxBasic, b:FlxBasic, ?options:ListenerOptions)
+	public static function listen(a:FlxBasic, b:FlxBasic, ?options:ListenerOptions): Listener
 	{
 		options = get_listener_options(options);
 
@@ -148,7 +149,7 @@ class FlxEcho extends FlxBasic
 		if (!a_is_object) add_group_bodies(cast a);
 		if (!b_is_object) add_group_bodies(cast b);
 
-		instance.world.listen(!a_is_object ? instance.groups[cast a] : instance.bodies[cast a],
+		return instance.world.listen(!a_is_object ? instance.groups[cast a] : instance.bodies[cast a],
 			!b_is_object ? instance.groups[cast b] : instance.bodies[cast b], options);
 	}
 
